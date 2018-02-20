@@ -9,7 +9,7 @@ php install/cli_install.php install \
 		--username $ADMIN_USERNAME \
 		--password $ADMIN_PASSWORD \
 		--email $ADMIN_EMAIL \
-		--http_server http://$DOMAIN_NAME/
+		--http_server $PROTOCOL://$DOMAIN_NAME/
 for c in config.php admin/config.php; do
 	sed -i "s#/workdir#$DOCUMENT_ROOT#g" $c
 done
