@@ -1,7 +1,7 @@
 FROM php:7.0-cli-alpine
 
 COPY dist /dist
-RUN tar czf opencart-3.0.2.0.tgz -C /dist . && chmod o+r opencart-3.0.2.0.tgz
+RUN tar czf opencart-3.0.3.1.tgz -C /dist . && chmod o+r opencart-3.0.3.1.tgz
 
 RUN apk update \
     && apk add mysql-client freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev \
