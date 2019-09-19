@@ -1,5 +1,5 @@
 #!/bin/sh
-tar xzf /opencart-3.0.3.1.tgz 
+tar xzf /opencart-3.0.3.2.tgz 
 php install/cli_install.php install \
 		--db_hostname $DB_HOST \
 		--db_username $DB_USER \
