@@ -13,6 +13,4 @@ php install/cli_install.php install \
 
 for c in config.php admin/config.php; do
 	sed -i "s#/workdir#$DOCUMENT_ROOT#g" $c
-        sed -i "s/define('HTTPS_SERVER', 'http/define('HTTPS_SERVER', 'https/" $c
-        sed -i "s/define('HTTPS_CATALOG', 'http/define('HTTPS_CATALOG', 'https/" $c
 done
