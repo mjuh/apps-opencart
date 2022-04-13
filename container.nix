@@ -24,7 +24,6 @@ let
         rm -r upload
 
         echo "Run installer"
-
         php install/cli_install.php install \
         --db_hostname $DB_HOST \
         --db_username $DB_USER \
@@ -36,10 +35,15 @@ let
         --email $ADMIN_EMAIL \
         --http_server $PROTOCOL://$DOMAIN_NAME/
 
-        echo "Fix config"
+        echo "Clean up installation"
+        rm -rf install
+        rm php.ini config-dist.php admin/config-dist.php
+        echo "Finish installation"
+
         for c in config.php admin/config.php; do
           sed -i "s#/workdir#$DOCUMENT_ROOT#g" $c
         done
+        mv .htaccess.txt .htaccess
 
         EOF
 
