@@ -2,7 +2,7 @@
   description = "Docker container with Opencart installer";
   inputs = {
     majordomo.url = "git+https://gitlab.intr/_ci/nixpkgs";
-    containerImageApache.url = "git+https://gitlab.intr/webservices/apache2-php73.git";
+    containerImageApache.url = "git+https://gitlab.intr/webservices/apache2-php74.git";
   };
 
   outputs = { self, nixpkgs, majordomo, ... } @ inputs:
@@ -19,7 +19,7 @@
               overlays = [ majordomo.overlay ];
             }) maketestCms;
             containerImageCMS = self.packages.${system}.container;
-            containerImageApache = inputs.containerImageApache.packages.${system}.container-master;
+            containerImageApache = inputs.containerImageApache.packages.${system}.container;
           }
           )
         )
@@ -41,6 +41,7 @@
       packages.${system} = {
         container = import ./container.nix {
           inherit nixpkgs system;
+          php = majordomo.packages.${system}.php74;
         };
 
         deploy = majordomo.outputs.deploy {
@@ -50,7 +51,7 @@
       checks.${system} = tests { };
       apps.${system}.vm = {
         type = "app";
-        program = "${self.packages.${system}.opencart-vm-test-run-Joomla-mariadb-nix-upstream}/bin/nixos-run-vms";
+        program = "${self.packages.${system}.opencart-vm-test-run-opencart-mariadb-nix-upstream}/bin/nixos-run-vms";
       };
 
       defaultPackage.${system} = self.packages.${system}.container;

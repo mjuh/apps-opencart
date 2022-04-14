@@ -1,4 +1,4 @@
-{ nixpkgs, system }:
+{ nixpkgs, system, php }:
 
 with import nixpkgs { inherit system; };
 let
@@ -14,7 +14,7 @@ let
         cat > $out/bin/${name}.sh <<'EOF'
         #!${bash}/bin/bash
         set -ex
-        export PATH=${coreutils}/bin:${unzip}/bin:${php74}/bin:${gnused}/bin
+        export PATH=${coreutils}/bin:${unzip}/bin:${php}/bin:${gnused}/bin
 
 
         echo "Extract installer archive."
@@ -56,7 +56,7 @@ in
 pkgs.dockerTools.buildLayeredImage rec {
   name = "docker-registry.intr/apps/opencart";
 
-  contents = [ bashInteractive coreutils unzip php74 entrypoint ];
+  contents = [ bashInteractive coreutils unzip php entrypoint ];
   config = {
     Entrypoint = "${entrypoint}/bin/opencart-install.sh";
     Env = [
